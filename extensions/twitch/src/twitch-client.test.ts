@@ -84,7 +84,7 @@ describe("TwitchClientManager", () => {
 
   const testAccount: TwitchAccountConfig = {
     username: "testbot",
-    token: "oauth:test123456",
+    accessToken: "oauth:test123456",
     clientId: "test-client-id",
     channel: "testchannel",
     enabled: true,
@@ -92,7 +92,7 @@ describe("TwitchClientManager", () => {
 
   const testAccount2: TwitchAccountConfig = {
     username: "testbot2",
-    token: "oauth:test789",
+    accessToken: "oauth:test789",
     clientId: "test-client-id-2",
     channel: "testchannel2",
     enabled: true,
@@ -170,7 +170,7 @@ describe("TwitchClientManager", () => {
     it("should normalize token by removing oauth: prefix", async () => {
       const accountWithPrefix: TwitchAccountConfig = {
         ...testAccount,
-        token: "oauth:actualtoken123",
+        accessToken: "oauth:actualtoken123",
       };
 
       // Override the mock to return a specific token for this test

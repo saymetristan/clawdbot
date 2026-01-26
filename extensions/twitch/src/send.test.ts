@@ -44,7 +44,7 @@ describe("send", () => {
 
   const mockAccount = {
     username: "testbot",
-    token: "oauth:test123",
+    accessToken: "oauth:test123",
     clientId: "test-client-id",
     channel: "#testchannel",
   };

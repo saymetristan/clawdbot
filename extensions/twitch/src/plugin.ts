@@ -153,7 +153,10 @@ export const twitchPlugin: ChannelPlugin<TwitchAccountConfig> = {
         error: (msg) => runtime.error(msg),
         debug: (msg) => runtime.log(msg),
       };
-      return await resolveTwitchTargets(inputs, account, kind, log);
+      const tokenResolution = resolveTwitchToken(cfg, {
+        accountId: accountId ?? DEFAULT_ACCOUNT_ID,
+      });
+      return await resolveTwitchTargets(inputs, account, kind, log, tokenResolution.token);
     },
   },
 
@@ -183,11 +186,22 @@ export const twitchPlugin: ChannelPlugin<TwitchAccountConfig> = {
     probeAccount: async ({
       account,
       timeoutMs,
+      cfg,
     }: {
       account: TwitchAccountConfig;
       timeoutMs: number;
+      cfg: ClawdbotConfig;
     }): Promise<unknown> => {
-      return await probeTwitch(account, timeoutMs);
+      const twitch = (cfg as Record<string, unknown>).channels as
+        | Record<string, unknown>
+        | undefined;
+      const twitchCfg = twitch?.twitch as Record<string, unknown> | undefined;
+      const accountMap = (twitchCfg?.accounts as Record<string, unknown> | undefined) ?? {};
+      const resolvedAccountId =
+        Object.entries(accountMap).find(([, value]) => value === account)?.[0] ??
+        DEFAULT_ACCOUNT_ID;
+      const tokenResolution = resolveTwitchToken(cfg, { accountId: resolvedAccountId });
+      return await probeTwitch(account, timeoutMs, tokenResolution.token);
     },
 
     /** Build account snapshot with current status */

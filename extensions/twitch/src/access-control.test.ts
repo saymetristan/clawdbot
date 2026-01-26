@@ -5,7 +5,7 @@ import type { TwitchAccountConfig, TwitchChatMessage } from "./types.js";
 describe("checkTwitchAccessControl", () => {
   const mockAccount: TwitchAccountConfig = {
     username: "testbot",
-    token: "oauth:test",
+    accessToken: "oauth:test",
   };
 
   const mockMessage: TwitchChatMessage = {
