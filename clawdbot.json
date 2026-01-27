@@ -16,7 +16,7 @@
   "agents": {
     "defaults": {
       "model": {
-        "primary": "openai-codex/gpt-4o"
+        "primary": "openai-codex/gpt-5.2"
       }
     }
   },
