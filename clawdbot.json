@@ -15,7 +15,9 @@
   },
   "agents": {
     "defaults": {
-      "model": "openai-codex/gpt-4o"
+      "model": {
+        "primary": "openai-codex/gpt-4o"
+      }
     }
   },
   "channels": {
