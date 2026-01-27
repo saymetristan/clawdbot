@@ -15,47 +15,7 @@
   },
   "agents": {
     "defaults": {
-      "model": {
-        "primary": "groq/openai/gpt-oss-120b",
-        "fallbacks": [
-          "deepseek/deepseek-chat",
-          "cerebras/llama3.1-70b"
-        ]
-      },
-      "models": {
-        "groq/openai/gpt-oss-120b": { "alias": "GPT OSS 120B (Groq)" },
-        "deepseek/deepseek-chat": { "alias": "DeepSeek Chat" },
-        "cerebras/llama3.1-70b": { "alias": "Llama 3.1 70B (Cerebras)" }
-      }
-    }
-  },
-  "models": {
-    "mode": "merge",
-    "providers": {
-      "groq": {
-        "baseUrl": "https://api.groq.com/openai/v1",
-        "apiKey": "${GROQ_API_KEY}",
-        "api": "openai-completions",
-        "models": [
-          { "id": "openai/gpt-oss-120b", "name": "GPT OSS 120B" }
-        ]
-      },
-      "deepseek": {
-        "baseUrl": "https://api.deepseek.com/v1",
-        "apiKey": "${DEEPSEEK_API_KEY}",
-        "api": "openai-completions",
-        "models": [
-          { "id": "deepseek-chat", "name": "DeepSeek Chat" }
-        ]
-      },
-      "cerebras": {
-        "baseUrl": "https://api.cerebras.ai/v1",
-        "apiKey": "${CEREBRAS_API_KEY}",
-        "api": "openai-completions",
-        "models": [
-          { "id": "llama3.1-70b", "name": "Llama 3.1 70B" }
-        ]
-      }
+      "model": "openai/gpt-4o"
     }
   },
   "channels": {
