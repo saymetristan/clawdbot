@@ -8,6 +8,24 @@ if [ -d "/data" ]; then
   if [ -f "/app/clawdbot.json" ] && [ ! -f "/data/clawdbot.json" ]; then
     cp /app/clawdbot.json /data/clawdbot.json 2>/dev/null || true
   fi
+  # Create auth-profiles.json from env vars if provided
+  if [ -n "$OPENAI_CODEX_ACCESS" ] && [ -n "$OPENAI_CODEX_REFRESH" ]; then
+    cat > /data/agents/main/agent/auth-profiles.json << EOF
+{
+  "version": 1,
+  "profiles": {
+    "openai-codex:default": {
+      "type": "oauth",
+      "provider": "openai-codex",
+      "access": "$OPENAI_CODEX_ACCESS",
+      "refresh": "$OPENAI_CODEX_REFRESH",
+      "expires": ${OPENAI_CODEX_EXPIRES:-1770420993133},
+      "accountId": "${OPENAI_CODEX_ACCOUNT_ID:-default}"
+    }
+  }
+}
+EOF
+  fi
   chown -R node:node /data 2>/dev/null || true
 fi
 
@@ -16,14 +34,7 @@ if [ -f "/data/clawdbot.json" ]; then
   export CLAWDBOT_CONFIG_PATH=/data/clawdbot.json
 fi
 
-# Create auth-profiles.json from environment variable if set
-if [ -n "$CLAWDBOT_AUTH_PROFILES" ]; then
-  AUTH_DIR="/data/agents/main/agent"
-  mkdir -p "$AUTH_DIR" 2>/dev/null || true
-  echo "$CLAWDBOT_AUTH_PROFILES" > "$AUTH_DIR/auth-profiles.json"
-  chown -R node:node "$AUTH_DIR" 2>/dev/null || true
-  export CLAWDBOT_STATE_DIR=/data
-fi
+export CLAWDBOT_STATE_DIR=/data
 
 # Switch to node user and run the command
 exec gosu node "$@"
