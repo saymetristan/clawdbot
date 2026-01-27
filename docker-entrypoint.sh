@@ -4,8 +4,8 @@ set -e
 # Fix permissions on /data if it exists (Railway volume)
 if [ -d "/data" ]; then
   mkdir -p /data/.clawdbot /data/workspace /data/agents/main/agent 2>/dev/null || true
-  # Copy config to /data if not exists (so it's writable)
-  if [ -f "/app/clawdbot.json" ] && [ ! -f "/data/clawdbot.json" ]; then
+  # Always copy config from image to /data (overwrite if exists)
+  if [ -f "/app/clawdbot.json" ]; then
     cp /app/clawdbot.json /data/clawdbot.json 2>/dev/null || true
   fi
   # Create auth-profiles.json from env vars if provided
