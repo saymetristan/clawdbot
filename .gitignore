@@ -62,8 +62,7 @@ apps/ios/*.mobileprovision
 # Local untracked files
 .local/
 .vscode/
-# Note: IDENTITY.md in docs/reference/templates/ is tracked (needed for workspace bootstrap)
-USER.md
+# Note: IDENTITY.md and USER.md in docs/reference/templates/ are tracked (needed for workspace bootstrap)
 .tgz
 
 # local tooling

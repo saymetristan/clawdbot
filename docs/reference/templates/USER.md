@@ -1,22 +1,28 @@
 ---
-summary: "User profile record"
+summary: "Workspace template for user profile"
 read_when:
   - Bootstrapping a workspace manually
+  - Updating user preferences
 ---
-# USER.md - About Your Human
+# USER.md - User Profile
 
-*Learn about the person you're helping. Update this as you go.*
+*Tell the agent about yourself.*
 
-- **Name:** 
-- **What to call them:** 
-- **Pronouns:** *(optional)*
-- **Timezone:** 
-- **Notes:** 
+## Basic Info
 
-## Context
+- **Name:** (Your name)
+- **Preferred address:** (How you want to be called)
+- **Pronouns:** (Your pronouns)
+- **Timezone:** (Your timezone, e.g., America/Mexico_City)
 
-*(What do they care about? What projects are they working on? What annoys them? What makes them laugh? Build this over time.)*
+## Notes
+
+Add any relevant context about yourself:
+- Communication preferences
+- Work style
+- Topics of interest
+- Anything the agent should know about you
 
 ---
 
-The more you know, the better you can help. But remember — you're learning about a person, not building a dossier. Respect the difference.
+*This file helps your agent understand who you are.*
