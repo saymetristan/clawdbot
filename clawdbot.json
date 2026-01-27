@@ -1,0 +1,60 @@
+{
+  "gateway": {
+    "mode": "local",
+    "bind": "lan",
+    "port": 8080,
+    "controlUi": {
+      "enabled": true,
+      "allowInsecureAuth": true,
+      "dangerouslyDisableDeviceAuth": true
+    },
+    "auth": {
+      "mode": "token",
+      "token": "${CLAWDBOT_GATEWAY_TOKEN}"
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "groq/gpt-oss-120b",
+        "fallbacks": [
+          "deepseek/deepseek-chat",
+          "cerebras/zai-glm-4.7"
+        ]
+      },
+      "models": {
+        "openai-codex/gpt-5.2": { "alias": "GPT 5.2 (Plus)" },
+        "groq/gpt-oss-120b": { "alias": "GPT OSS 120B (Groq)" },
+        "deepseek/deepseek-chat": { "alias": "DeepSeek V3.2" },
+        "cerebras/zai-glm-4.7": { "alias": "GLM 4.7 (Cerebras)" }
+      }
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "deepseek": {
+        "baseUrl": "https://api.deepseek.com/v1",
+        "apiKey": "${DEEPSEEK_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          { "id": "deepseek-chat", "name": "DeepSeek V3.2" }
+        ]
+      },
+      "cerebras": {
+        "baseUrl": "https://api.cerebras.ai/v1",
+        "apiKey": "${CEREBRAS_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          { "id": "zai-glm-4.7", "name": "GLM 4.7" }
+        ]
+      }
+    }
+  },
+  "channels": {
+    "whatsapp": {
+      "dmPolicy": "open",
+      "allowFrom": ["*"]
+    }
+  }
+}
