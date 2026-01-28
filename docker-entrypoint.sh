@@ -8,6 +8,12 @@ if [ -d "/data" ]; then
   if [ -f "/app/clawdbot.json" ]; then
     cp /app/clawdbot.json /data/clawdbot.json 2>/dev/null || true
   fi
+  # Reset WhatsApp credentials if RESET_WHATSAPP env is set
+  if [ "$RESET_WHATSAPP" = "1" ]; then
+    rm -rf /data/credentials/whatsapp 2>/dev/null || true
+    rm -rf /data/agents/main/agent/whatsapp 2>/dev/null || true
+    echo "WhatsApp credentials reset"
+  fi
   # Create auth-profiles.json from env vars if provided
   if [ -n "$OPENAI_CODEX_ACCESS" ] && [ -n "$OPENAI_CODEX_REFRESH" ]; then
     cat > /data/agents/main/agent/auth-profiles.json << EOF
